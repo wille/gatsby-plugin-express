@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/wille/gatsby-plugin-express/issues"
   },
-  "homepage": "https://github.com/wille/gatsby-plugin-express#readme"
+  "homepage": "https://github.com/wille/gatsby-plugin-express#readme",
+  "dependencies": {
+    "@reach/router": "^1.2.1"
+  }
 }
