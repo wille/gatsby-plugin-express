@@ -2,7 +2,6 @@
 
 ![version](https://img.shields.io/npm/v/gatsby-plugin-express.svg)
 ![downloads](https://img.shields.io/npm/dt/gatsby-plugin-express.svg)
-![minizipped size](https://img.shields.io/bundlephobia/minzip/gatsby-plugin-express.svg)
 
 Usage
 
