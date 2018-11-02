@@ -3,9 +3,11 @@
 ![version](https://img.shields.io/npm/v/gatsby-plugin-express.svg)
 ![downloads](https://img.shields.io/npm/dt/gatsby-plugin-express.svg)
 
-Usage
+Server side client route matching, redirect and 404 handling
 
-## `gatsby-config.js`
+## Usage
+
+### `gatsby-config.js`
 
 ```javascript
 plugins: [
@@ -18,11 +20,13 @@ plugins: [
 ]
 ```
 
-## express app
+### express app
 
 ```javascript
 const gatsyExpress = require('gatsby-plugin-express');
 const app = express();
 
+// serve static files before gatsbyExpress
+app.use(express.static('public/'));
 app.use(gatsyExpress('config/gatsby-express.json'));
 ```

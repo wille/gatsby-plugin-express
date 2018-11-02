@@ -27,11 +27,6 @@ module.exports = function redirect(data = 'gatsby-express.json', root) {
 
         return res.sendFile(html);
       }
-
-      // strict match
-      if (req.path === page.path) {
-        return next();
-      }
     }
 
     return res.sendStatus(404);
