@@ -12,7 +12,9 @@
   },
   "keywords": [
     "gatsby",
-    "express"
+    "express",
+    "gatsby-plugin",
+    "redirects"
   ],
   "author": "wille",
   "license": "ISC",
