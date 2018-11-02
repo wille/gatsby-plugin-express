@@ -28,5 +28,8 @@ const app = express();
 
 // serve static files before gatsbyExpress
 app.use(express.static('public/'));
-app.use(gatsyExpress('config/gatsby-express.json'));
+app.use(gatsyExpress('config/gatsby-express.json', {
+  publicDir: 'public/',
+  template: 'public/404/index.html'
+}));
 ```
