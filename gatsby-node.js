@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 exports.onPostBuild = ({ store }, pluginOptions) => {
   const { redirects, pages } = store.getState();
@@ -17,7 +18,7 @@ exports.onPostBuild = ({ store }, pluginOptions) => {
   };
 
   fs.writeFileSync(
-    pluginOptions.output || 'gatsby-express.json',
+    path.resolve(pluginOptions.output || 'gatsby-express.json'),
     JSON.stringify(data, null, 2)
   );
 };
