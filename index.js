@@ -22,9 +22,16 @@ module.exports = function redirect(data = 'gatsby-express.json', options) {
     for (var page of data.pages) {
       const b = page.matchPath && match(page.matchPath, req.path);
       if (b) {
+        const baseDir = path.join(publicDir, b.uri);
+
+        if (baseDir.indexOf(publicDir) !== 0) {
+          // fallthrough to 404
+          break;
+        }
+
         const html = require.resolve('index.html', {
           paths: [
-            path.join(publicDir, b.uri.slice(1))
+            baseDir,
           ]
         });
 
