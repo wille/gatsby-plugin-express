@@ -20,9 +20,9 @@ module.exports = function redirect(data = 'gatsby-express.json', options) {
     }
 
     for (var page of data.pages) {
-      const b = page.matchPath && match(page.matchPath, req.path);
-      if (b) {
-        const baseDir = path.join(publicDir, b.uri);
+      const m = page.matchPath && match(page.matchPath, req.path);
+      if (m) {
+        const baseDir = path.join(publicDir, m.uri);
 
         if (baseDir.indexOf(publicDir) !== 0) {
           // fallthrough to 404
@@ -35,7 +35,30 @@ module.exports = function redirect(data = 'gatsby-express.json', options) {
           ]
         });
 
-        return res.sendFile(html);
+        if (html) {
+          res.sendFile(html);
+        }
+
+        break;
+      } else if (req.path === page.path) {
+        // handle /without-trailing-slash to /without-trailing-slash/index.html
+        const baseDir = path.join(publicDir, page.path);
+
+        if (baseDir.indexOf(publicDir) !== 0) {
+          // fallthrough to 404
+          break;
+        }
+
+        const html = require.resolve('index.html', {
+          paths: [
+            baseDir,
+          ]
+        });
+
+        if (html) {
+          return res.sendFile(html);
+        }
+        break;
       }
     }
 
