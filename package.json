@@ -4,6 +4,7 @@
   "description": "Express server redirects with Gatsby",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint --fix gatsby-node.js index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +25,13 @@
   "homepage": "https://github.com/wille/gatsby-plugin-express#readme",
   "dependencies": {
     "@reach/router": "^1.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
   }
 }
