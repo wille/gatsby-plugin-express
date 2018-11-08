@@ -22,7 +22,7 @@ module.exports = function redirect(data = 'gatsby-express.json', options) {
     for (var page of data.pages) {
       const m = page.matchPath && match(page.matchPath, req.path);
       if (m) {
-        const baseDir = path.join(publicDir, m.uri);
+        const baseDir = path.join(publicDir, page.path);
 
         if (baseDir.indexOf(publicDir) !== 0) {
           // fallthrough to 404
@@ -36,7 +36,7 @@ module.exports = function redirect(data = 'gatsby-express.json', options) {
         });
 
         if (html) {
-          res.sendFile(html);
+          return res.sendFile(html);
         }
 
         break;
