@@ -42,7 +42,7 @@ module.exports = function redirect (data = 'gatsby-express.json', options) {
 
       if (m) {
         const index = require.resolve('index.html', {
-          paths: [join(page.path)]
+          paths: [join(m.uri)]
         })
 
         if (index) {
