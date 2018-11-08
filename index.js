@@ -13,7 +13,7 @@ module.exports = function redirect (data = 'gatsby-express.json', options) {
 
   const join = p => path.join(publicDir, p)
 
-  return async function (req, res) {
+  return async function (req, res, next) {
     for (var r of data.redirects) {
       if (req.path === r.fromPath) {
         const code = r.isPermanent ? 301 : 302
@@ -56,11 +56,11 @@ module.exports = function redirect (data = 'gatsby-express.json', options) {
       }
     }
 
-    if (template) {
+    if (template && req.accepts('html')) {
       res.status(404)
       res.sendFile(template)
     } else {
-      res.sendStatus(404)
+      next()
     }
   }
 }
