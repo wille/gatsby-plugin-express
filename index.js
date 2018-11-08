@@ -31,6 +31,10 @@ module.exports = function redirect (data = 'gatsby-express.json', options) {
         })
 
         if (index) {
+          // remove trailing slashes in request
+          if (options.redirectSlashes && req.path.endsWith('/')) {
+            return res.redirect(req.path.substr(0, req.path.length - 1))
+          }
           return res.sendFile(index)
         }
         break
