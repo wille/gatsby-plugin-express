@@ -11,6 +11,8 @@ module.exports = function redirect(data = 'gatsby-express.json', options) {
     data = JSON.parse(data);
   }
 
+  const join = p => path.join(publicDir, p);
+
   return async function(req, res) {
     for (var r of data.redirects) {
       if (req.path === r.fromPath) {
@@ -20,43 +22,31 @@ module.exports = function redirect(data = 'gatsby-express.json', options) {
     }
 
     for (var page of data.pages) {
-      const m = page.matchPath && match(page.matchPath, req.path);
-      if (m) {
-        const baseDir = path.join(publicDir, page.path);
-
-        if (baseDir.indexOf(publicDir) !== 0) {
-          // fallthrough to 404
-          break;
-        }
-
-        const html = require.resolve('index.html', {
-          paths: [
-            baseDir,
-          ]
-        });
-
-        if (html) {
-          return res.sendFile(html);
-        }
-
-        break;
-      } else if (req.path === page.path) {
+      if (req.path === page.path) {
         // handle /without-trailing-slash to /without-trailing-slash/index.html
-        const baseDir = path.join(publicDir, page.path);
-
-        if (baseDir.indexOf(publicDir) !== 0) {
-          // fallthrough to 404
-          break;
-        }
-
-        const html = require.resolve('index.html', {
+        const index = require.resolve('index.html', {
           paths: [
-            baseDir,
+            join(page.path),
           ]
         });
 
-        if (html) {
-          return res.sendFile(html);
+        if (index) {
+          return res.sendFile(index);
+        }
+        break;
+      }
+    }
+
+    for (const page of data.pages.filter(p => p.matchPath)) {
+      const m = match(page.matchPath, req.path);
+
+      if (m) {
+        const index = require.resolve('index.html', {
+          paths: [join(page.path)]
+        })
+
+        if (index) {
+          return res.sendFile(index);
         }
         break;
       }
