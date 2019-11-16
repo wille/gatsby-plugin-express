@@ -4,7 +4,6 @@ const match = require('@reach/router/lib/utils').match
 
 module.exports = function redirect (data = 'gatsby-express.json', options) {
   const publicDir = options.publicDir || path.resolve('public/')
-  const template = options.template || path.resolve(publicDir || 'public/', '404/index.html')
 
   if (typeof data === 'string') {
     data = fs.readFileSync(data)
@@ -56,11 +55,6 @@ module.exports = function redirect (data = 'gatsby-express.json', options) {
       }
     }
 
-    if (template && req.accepts('html')) {
-      res.status(404)
-      res.sendFile(template)
-    } else {
-      next()
-    }
+    next()
   }
 }
