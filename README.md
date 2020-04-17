@@ -3,7 +3,7 @@
 ![version](https://img.shields.io/npm/v/gatsby-plugin-express.svg)
 ![downloads](https://img.shields.io/npm/dt/gatsby-plugin-express.svg)
 
-Server side client route matching, redirect and 404 handling
+Server side client route matching and redirect
 
 ## Usage
 
@@ -50,8 +50,7 @@ const app = express();
 // serve static files before gatsbyExpress
 app.use(express.static('public/'));
 app.use(gatsbyExpress('config/gatsby-express.json', {
-  publicDir: 'public/',
-  template: 'public/404/index.html',
+  publicDir: 'public/'
 
   // redirects all /path/ to /path
   // should be used with gatsby-plugin-remove-trailing-slashes
