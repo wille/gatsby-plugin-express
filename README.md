@@ -50,7 +50,7 @@ const app = express();
 // serve static files before gatsbyExpress
 app.use(express.static('public/'));
 app.use(gatsbyExpress('config/gatsby-express.json', {
-  publicDir: 'public/'
+  publicDir: 'public/',
 
   // redirects all /path/ to /path
   // should be used with gatsby-plugin-remove-trailing-slashes
