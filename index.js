@@ -34,7 +34,7 @@ module.exports = function redirect (data = 'gatsby-express.json', options) {
           if (options.redirectSlashes && req.path.endsWith('/')) {
             return res.redirect(req.path.substr(0, req.path.length - 1))
           }
-          return res.sendFile(index)
+          return res.sendFile(path.resolve(index))
         }
         break
       }
@@ -49,7 +49,7 @@ module.exports = function redirect (data = 'gatsby-express.json', options) {
         })
 
         if (index) {
-          return res.sendFile(index)
+          return res.sendFile(path.resolve(index))
         }
         break
       }
